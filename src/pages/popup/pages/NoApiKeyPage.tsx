@@ -14,8 +14,15 @@ import StyledButton from "@pages/popup/components/StyledButton";
 import { COLORS } from "@src/constant/style";
 import { t } from "@src/chrome/i18n";
 
+// type definition of apiKeyType to store accessKeyId, secretAccessKey, sessionToken
+type apiKeyType = {
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+}
+
 type NoApiKeyPageProps = {
-  checkApiKey: (key: string) => void;
+  checkApiKey: (key: apiKeyType) => void;
   apiKeyError?: Error;
   loading: boolean;
 };
@@ -24,14 +31,28 @@ export const NoApiKeyPage = ({
   checkApiKey,
   apiKeyError,
 }: NoApiKeyPageProps) => {
-  const [apiKey, setApiKey] = useState("");
+  const [accessKeyId, setAccessKeyId] = useState("");
+  const [secretAccessKey, setSecretAccessKey] = useState("");
+  const [sessionToken, setSessionToken] = useState("");
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setApiKey(event.target.value);
+  const handleAccessKeyIdChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setAccessKeyId(event.target.value);
+  };
+
+  const handleSecretAccessKeyChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setSecretAccessKey(event.target.value);
+  };
+
+  const handleSessionTokenChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setSessionToken(event.target.value);
   };
 
   const onClickSaveButton = () => {
-    checkApiKey(apiKey);
+    checkApiKey({
+      accessKeyId: accessKeyId,
+      secretAccessKey: secretAccessKey,
+      sessionToken: sessionToken
+  });
   };
 
   return (
@@ -48,50 +69,42 @@ export const NoApiKeyPage = ({
           <>
             <HStack mb={3}>
               <Input
-                value={apiKey}
+                value={accessKeyId}
                 type="password"
                 h="24px"
-                onChange={handleChange}
-                placeholder={t("noApiKeyPage_openAIApiKey_placeholder")}
+                onChange={handleAccessKeyIdChange}
+                placeholder={t("noApiKeyPage_accessKeyId_placeholder")}
                 size="sm"
               />
+            </HStack>
+
+            <HStack mb={3}>
+              <Input
+                value={secretAccessKey}
+                type="password"
+                h="24px"
+                onChange={handleSecretAccessKeyChange}
+                placeholder={t("noApiKeyPage_secretAccessKey_placeholder")}
+                size="sm"
+              />
+            </HStack>
+
+            <HStack mb={3}>
+              <Input
+                value={sessionToken}
+                type="password"
+                h="24px"
+                onChange={handleSessionTokenChange}
+                placeholder={t("noApiKeyPage_sessionToken_placeholder")}
+                size="sm"
+              />
+            </HStack>
+
+            <HStack mb={3}>
               <StyledButton h="24px" size="md" onClick={onClickSaveButton}>
                 {t("noApiKeyPage_saveButtonText")}
               </StyledButton>
             </HStack>
-
-            <Text
-              as="h3"
-              fontSize={16}
-              lineHeight={1.5}
-              color={COLORS.WHITE}
-              alignSelf="center"
-            >
-              {t("noApiKeyPage_howToGetApiKey")}
-            </Text>
-            <OrderedList
-              spacing={1.5}
-              paddingLeft={2}
-              textAlign="start"
-              color={COLORS.WHITE}
-              fontSize={12}
-              lineHeight="16px"
-            >
-              <li>
-                {separateI18nAndAddLink(
-                  t("noApiKeyPage_howToGetApiKeyDetail1"),
-                  "https://platform.openai.com/signup"
-                )}
-              </li>
-              <li>
-                {separateI18nAndAddLink(
-                  t("noApiKeyPage_howToGetApiKeyDetail2"),
-                  "https://platform.openai.com/account/api-keys"
-                )}
-              </li>
-              <li>{t("noApiKeyPage_howToGetApiKeyDetail3")}</li>
-              <li>{t("noApiKeyPage_howToGetApiKeyDetail4")}</li>
-            </OrderedList>
           </>
         )}
         {apiKeyError && (

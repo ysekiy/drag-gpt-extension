@@ -1,22 +1,28 @@
 import { assign, createMachine } from "xstate";
 
+type apiKeyType = {
+  accessKeyId: string;
+  secretAccessKey: string;
+  sessionToken: string;
+}
+
 type Events =
   | {
       type: "CHECK_API_KEY";
-      data: string;
+      data: apiKeyType;
     }
   | {
       type: "RESET_API_KEY" | "GO_TO_QUICK_CHAT" | "EXIT_QUICK_CHAT";
     };
 
 interface Context {
-  openAiApiKey: string | null;
+  openAiApiKey: apiKeyType;
   apiKeyCheckError?: Error;
 }
 
 type Services = {
   getApiKeyFromBackground: {
-    data: string;
+    data: apiKeyType;
   };
   saveApiKeyToBackground: {
     data: void;
@@ -34,7 +40,7 @@ const popupStateMachine = createMachine(
       services: {} as Services,
     },
     context: {
-      openAiApiKey: null,
+      openAiApiKey: {accessKeyId: "", secretAccessKey: "", sessionToken: ""},
     },
     tsTypes: {} as import("./popupStateMachine.typegen").Typegen0,
     states: {
@@ -92,7 +98,7 @@ const popupStateMachine = createMachine(
         openAiApiKey: (_, event) => event.data,
       }),
       resetOpenAiApiKey: assign({
-        openAiApiKey: null,
+        openAiApiKey: {accessKeyId: "", secretAccessKey: "", sessionToken: ""},
       }),
     },
   }

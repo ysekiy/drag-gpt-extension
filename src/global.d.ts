@@ -112,9 +112,14 @@ declare global {
     };
     data?: { result: string; chunk?: string; isDone?: boolean };
   };
+  type apiKeyType = {
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+  };
   type SaveAPIKey = {
     type: "SaveAPIKey";
-    input: string;
+    input: apiKeyType;
     data?: "success";
   };
   type ResetAPIKey = {
@@ -125,7 +130,7 @@ declare global {
   type GetAPIKey = {
     type: "GetAPIKey";
     input?: never;
-    data?: string;
+    data?: apiKeyType;
   };
   type GetSlots = {
     type: "GetSlots";

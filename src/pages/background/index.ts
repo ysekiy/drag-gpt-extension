@@ -76,19 +76,21 @@ chrome.runtime.onConnect.addListener((port) => {
         }
         case "GetAPIKey": {
           const apiKey = await ApiKeyStorage.getApiKey();
-          sendResponse({ type: "GetAPIKey", data: apiKey });
+          console.log("[DEBUG] GetAPIKey called", "apiKey", apiKey)
+          // sendResponse({ type: "GetAPIKey", data: apiKey });
           break;
         }
         case "SaveAPIKey":
-          await chatGPT({
-            input: "hello",
-            apiKey: message.input,
-            slot: { type: "ChatGPT" },
-          }).catch((error) => {
-            ApiKeyStorage.setApiKey(null);
-            throw error;
-          });
-          await ApiKeyStorage.setApiKey(message.input);
+          // await chatGPT({
+          //   input: "hello",
+          //   apiKey: message.input,
+          //   slot: { type: "ChatGPT" },
+          // }).catch((error) => {
+          //   ApiKeyStorage.setApiKey(null);
+          //   throw error;
+          // });
+          // await ApiKeyStorage.setApiKey(message.input);
+          console.log("[DEBUG] SaveAPIKey called", "message.input", message.input)
           sendResponse({ type: "SaveAPIKey", data: "success" });
           break;
         case "ResetAPIKey":

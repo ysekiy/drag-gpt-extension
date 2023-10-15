@@ -10,7 +10,13 @@ import {
 import MainLayout from "@pages/popup/components/layout/MainLayout";
 import QuickChattingPage from "@pages/popup/pages/QuickChattingPage";
 
-const saveApiKeyToBackground = async (apiKey: string) => {
+  type apiKeyType = {
+    accessKeyId: string;
+    secretAccessKey: string;
+    sessionToken: string;
+  }
+
+const saveApiKeyToBackground = async (apiKey: apiKeyType) => {
   await sendMessageToBackgroundAsync({
     type: "SaveAPIKey",
     input: apiKey,
@@ -35,7 +41,7 @@ export default function Popup() {
   const [state, send] = useMachine(popupStateMachine, {
     services: {
       saveApiKeyToBackground: (context) => {
-        return saveApiKeyToBackground(context.openAiApiKey ?? "");
+        return saveApiKeyToBackground(context.openAiApiKey);
       },
       getApiKeyFromBackground,
     },
@@ -44,7 +50,7 @@ export default function Popup() {
     },
   });
 
-  const checkApiKey = (apiKey: string) => {
+  const checkApiKey = (apiKey: apiKeyType) => {
     send({ type: "CHECK_API_KEY", data: apiKey });
   };
 

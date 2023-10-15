@@ -11,6 +11,15 @@
   "noApiKeyPage_openAIApiKey_placeholder": {
     "message": "OpenAI API 密钥"
   },
+  "noApiKeyPage_accessKeyId_placeholder": {
+    "message": "AWS Access Key ID"
+  },
+  "noApiKeyPage_secretAccessKey_placeholder": {
+    "message": "AWS Secret Access Key"
+  },
+  "noApiKeyPage_sessionToken_placeholder": {
+    "message": "AWS Session Token"
+  },
   "noApiKeyPage_checkingApiKey": {
     "message": "正在检查 API 密钥...\n发送测试请求中..."
   },

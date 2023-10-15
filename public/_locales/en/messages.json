@@ -1,15 +1,24 @@
 {
   "extensionName": {
-    "message": "Drag GPT - Start AI Easily with Drag and Drop!"
+    "message": "Drag Bedrock - Start AI Easily with Drag and Drop!"
   },
   "extensionDescription": {
     "message": "Easily ask questions or make requests to ChatGPT by simply dragging and clicking!"
   },
   "dragGPT": {
-    "message": "Drag GPT"
+    "message": "Drag Bedrock"
   },
   "noApiKeyPage_openAIApiKey_placeholder": {
     "message": "OpenAI API Key"
+  },
+  "noApiKeyPage_accessKeyId_placeholder": {
+    "message": "AWS Access Key ID"
+  },
+  "noApiKeyPage_secretAccessKey_placeholder": {
+    "message": "AWS Secret Access Key"
+  },
+  "noApiKeyPage_sessionToken_placeholder": {
+    "message": "AWS Session Token"
   },
   "noApiKeyPage_checkingApiKey": {
     "message": "Checking API Key...\nSending test request..."

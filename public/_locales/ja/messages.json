@@ -11,6 +11,15 @@
   "noApiKeyPage_openAIApiKey_placeholder": {
     "message": "OpenAI APIキー"
   },
+  "noApiKeyPage_accessKeyId_placeholder": {
+    "message": "AWS Access Key ID"
+  },
+  "noApiKeyPage_secretAccessKey_placeholder": {
+    "message": "AWS Secret Access Key"
+  },
+  "noApiKeyPage_sessionToken_placeholder": {
+    "message": "AWS Session Token"
+  },
   "noApiKeyPage_checkingApiKey": {
     "message": "APIキーを確認するために\nテストリクエストを送信中..."
   },
